@@ -4,19 +4,30 @@ function Home() {
     const [isValentineNo, setIsValentineNo] = useState(false);
     const [isValentineYes, setIsValentineYes] = useState(false);
     const [valentine, setValentine] = useState(true);
+    const [returnHome, setReturnHome] = useState(false);
 
     const [resto, setresto] = useState(false);
 
     const restoChoice = useRef("");
 
     const handleValentineNo = () => {
+        setReturnHome(true);
         setValentine(false);
         setIsValentineNo(true);
     };
 
     const handleValentineYes = () => {
+        setReturnHome(true);
         setValentine(false);
         setIsValentineYes(true);
+    };
+
+    const handleReturnHome = () => {
+        setReturnHome(false);
+        setValentine(true);
+        setIsValentineNo(false);
+        setIsValentineYes(false);
+        setresto(false);
     };
 
     const handleRestoClick = () => {
@@ -33,6 +44,32 @@ function Home() {
 
     return (
         <div>
+            {returnHome && (
+                <div>
+                    <div className="pl-4 pt-4">
+                        <button
+                            onClick={handleReturnHome}
+                            className="text-blue-400"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                className="inline-block w-4 h-4 mr-2"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                                ></path>
+                            </svg>
+                            Retour
+                        </button>
+                    </div>
+                </div>
+            )}
             {valentine && (
                 <div>
                     <div className="flex justify-center items-center pt-10">
@@ -115,9 +152,9 @@ function Home() {
 
                 {resto && (
                     <div>
-                        <div className="flex justify-center pt-10">
+                        <div className="flex justify-center pt-4">
                             <img
-                                className="w-[300px]"
+                                className="w-[400px]"
                                 src="assets/img/bigcat.jpg"
                                 alt="restaurant"
                             />
